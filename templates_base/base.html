@@ -7,8 +7,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>{% block titulo%}{% endblock titulo%}</title>
+        <meta name="author" content="Germán Wassermann" />
+        <title>{% block titulo%}Compumundo HiperMegaRed{% endblock titulo%}</title>
         <!-- Favicon-->
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
@@ -23,14 +23,15 @@
        <!-- Navigation-->
        <nav class="navbar navbar-light bg-light static-top">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
-            <a class="navbar-brand" href="{% url 'lista_cursos' %}">Cursos</a>
-            <a class="navbar-brand" href="{% url 'lista_estudiantes' %}">Estudiantes</a>
+            <a class="nav-link" href="{% url 'inicio' %}">Home</a>
+            <a class="nav-link" href="#!">About</a>
+            <a class="nav-link" href="#!">Contact</a>
+            <a class="nav-link active" aria-current="page" href="#">Blog</a></li>
             {% if user.is_authenticated %}
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <div style="display: inline-flex;">
-                        <span>{{ user.username }}</span>
+                        <span>{{ user.username }}  <img src="{{ user.avatar.imagen.url }}" style = "max-width: 30px;" /></span>
                     </div>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -51,11 +52,9 @@
             <a class="btn btn-success" href="{% url 'registro' %}">Crear nueva cuenta</a>
             {% endif %}
         </div>
-     </nav>
      
 
-
-        <section style="padding:4rem 3rem;">
+        <section style="display: flex;; justify-content: center; align-items: center;">
             {% block contenido %}
             {% endblock contenido %}
         </section>
@@ -71,7 +70,7 @@
                             <li class="list-inline-item"><a href="#!">Contacto</a></li>
                       
                         </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Curso de Python - CoderHouse.</p>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; Compumundo HiperMegaRed.</p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">

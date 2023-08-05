@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+
+<div>
+
+    <h1>{{ posteo.titulo }}</h1>
+    <p>{{ posteo.bajada }}</p>
+    <p>Creado por: {{ posteo.creador }}</p>
+    <p>Fecha de publicación: {{ posteo.fecha_publicacion }}</p>
+    <img src="{{ posteo.imagen_url }}" alt="{{ posteo.imagen_alt }}" />
+    <p>{{ posteo.texto }}</p>
+    
+
+    
+
+    <br><br>
+    <a href="{% url 'lista_posteos' %}">Volver lista</a>
+</div>
+{% endblock contenido %}

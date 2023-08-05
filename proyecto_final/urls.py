@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio, name = "inicio"),
     path("perfiles/",include("app_perfiles.urls")),
+    path("blog/",include("app_blog.urls")),
     path('registro/', registro, name="registro"),
 
 ]

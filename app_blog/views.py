@@ -16,7 +16,7 @@ class PosteoListView(LoginRequiredMixin,ListView):
 
 class PosteoCreateView(LoginRequiredMixin,CreateView):
    model = Posteo
-   fields = ('titulo', 'bajada', 'creador', 'imagen', 'texto' )
+   fields = ('titulo', 'bajada', 'creador', 'imagen', 'texto','fecha_publicacion' )
    success_url = reverse_lazy('lista_posteos')
 
 class PosteoDetailView(LoginRequiredMixin,DetailView):
@@ -25,7 +25,7 @@ class PosteoDetailView(LoginRequiredMixin,DetailView):
 
 class PosteoUpdateView(LoginRequiredMixin,UpdateView):
    model = Posteo
-   fields = ('titulo', 'bajada', 'creador', 'imagen', 'texto' )
+   fields = ('titulo', 'bajada', 'creador', 'imagen', 'texto', 'fecha_publicacion' )
    success_url = reverse_lazy('lista_posteos')
 
 class PosteoDeleteView(LoginRequiredMixin,DeleteView):

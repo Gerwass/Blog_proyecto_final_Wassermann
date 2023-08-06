@@ -19,13 +19,13 @@ from django.urls import path, include
 from proyecto_final.views import inicio
 from django.conf import settings
 from django.conf.urls.static import static
-from app_perfiles.views import  registro
+from perfiles.views import  registro
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio, name = "inicio"),
-    path("perfiles/",include("app_perfiles.urls")),
-    path("blog/",include("app_blog.urls")),
+    path("perfiles/",include("perfiles.urls")),
+    path("blog/",include("blog.urls")),
     path('registro/', registro, name="registro"),
 
 ]

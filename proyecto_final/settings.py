@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'proyecto_final',
-    'app_perfiles',
-    'app_blog'
+    'perfiles',
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -132,7 +132,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/app_perfiles/login'
+LOGIN_URL = '/perfiles/login'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

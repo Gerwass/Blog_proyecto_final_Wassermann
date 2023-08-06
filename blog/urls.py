@@ -6,7 +6,7 @@ from blog.views import PosteoListView, PosteoCreateView, PosteoDetailView, Poste
 
 
 urlpatterns = [
-    path("blog/posteos/", PosteoListView.as_view(), name="lista_posteos"),
+    path("posteos/", PosteoListView.as_view(), name="lista_posteos"),
     path('posteos/<int:pk>/', PosteoDetailView.as_view(), name="ver_posteo"),
     path('crear-posteo/', PosteoCreateView.as_view(), name="crear_posteo"),
     path('editar-posteo/<int:pk>/', PosteoUpdateView.as_view(), name="editar_posteo"),

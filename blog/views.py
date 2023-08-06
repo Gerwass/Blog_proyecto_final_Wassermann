@@ -12,7 +12,7 @@ from blog.models import Posteo
 
 class PosteoListView(LoginRequiredMixin,ListView):
    model = Posteo
-   template_name = 'app_blog/lista_posteos.html'
+   template_name = 'blog/lista_posteos.html'
 
 class PosteoCreateView(LoginRequiredMixin,CreateView):
    model = Posteo

@@ -24,7 +24,7 @@
        <nav class="navbar navbar-light bg-light static-top" display="inline">
         <div class="container">
             <a class="nav-link" href="{% url 'inicio' %}">Home</a>
-            <a class="nav-link" href="#!">About</a>
+            <a class="nav-link" href="{% url 'about' %}">About</a>
             <a class="nav-link" href="#!">Contact</a>
             <a class="nav-link active" aria-current="page" href="{% url 'lista_posteos' %}">Blog</a></li>
             {% if user.is_authenticated %}

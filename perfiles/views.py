@@ -89,3 +89,10 @@ def agregar_avatar(request):
         template_name="perfiles/formulario_avatar.html",
         context={'form': formulario},
     )
+
+
+def about(request):
+    return render(
+        request=request,
+        template_name="perfiles/about.html"
+    )

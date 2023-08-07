@@ -7,7 +7,7 @@ class Posteo (models.Model):
     titulo = models.CharField(max_length=64)
     bajada = models.CharField(max_length=140)
     creador = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posteo_creados', null=True)
-    imagen = models.ImageField(upload_to='')
+    imagen = models.ImageField(upload_to='media')
     texto = models.CharField(max_length=5000)
     fecha_publicacion=models.DateField(null=True)
 

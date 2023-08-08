@@ -1,13 +1,28 @@
 {%extends "base.html"%}
 
 <head>
-  <title>
+  
     {% block titulo%}
       INICIO
     {% endblock titulo%}
 
-    </title>
+ 
+    <style>
+        .card {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+      
+        .card img {
+          width: 100%;
+          height: auto;
+        }
+      </style>
 </head>
+
 
 
 
@@ -15,12 +30,7 @@
 
 </nav>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-    .container {
-        display: flex;
-        justify-content: center;
-    }
-</style>
+
 {% if user.is_authenticated %}
 <h3>Hola {{user.get_full_name}}</h3>
 <div>
@@ -33,69 +43,39 @@
 
 </div>
 <br><br>
-<!-- Page content-->
 <div class="container">
-    <div style="display: flex; justify-content: center"  class="row">
-        <!-- Blog entries-->
+    <!-- Nested row for non-featured blog posts -->
+    {% for posteo in posteos %}
         <div class="col-lg-8">
-            <!-- Featured blog post-->
-            <div class="card mb-4">
-                <a href=""><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+            <!-- Blog post -->
+            <div class="card mb-5">
+                <a href="{% url 'ver_posteo' posteo.id %}">
+                    <div class="image-container">
+                        <img src="{{ posteo.imagen.url }}" alt="{{ posteo.imagen.alt }}" />
+                    </div>
+                </a>
                 <div class="card-body">
-                    <div class="small text-muted">January 1, 2023</div>
-                    <h2 class="card-title">Featured Post Title</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                    <a class="btn btn-primary" href="#!">Read more →</a>
+                    <div class="small text-muted">{{ posteo.fecha_publicacion }}</div>
+                    <h2 class="card-title h4">{{ posteo.titulo }}</h2>
+                    <p class="card-text">{{ posteo.bajada }}</p>
+                    <a class="btn btn-primary" href="{% url 'ver_posteo' posteo.id %}">Read more →</a>
                 </div>
             </div>
-            <!-- Nested row for non-featured blog posts-->
-            {% for posteo in posteos %}
-             <div class="row">
-                <div class="col-lg-6">
-                    <!-- Blog post-->
-                    <div class="card mb-4">
-                        <a href="#!"><img src="{{ posteo.imagen.url }}" alt="{{ posteo.imagen.alt }}" style="max-width: 400px; max-height: 300px;" /></a>
-                        <div class="card-body">
-                            <div class="small text-muted">{{ posteo.fecha_publicacion }}</div>
-                            <h2 class="card-title h4">{{ posteo.titulo }}</h2>
-                            <p class="card-text">{{ posteo.texto }}</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
-                        </div>
-                    </div>
-            {% endfor %}
-                    <!-- Blog post-->
-                    <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                        <div class="card-body">
-                            <div class="small text-muted">January 1, 2023</div>
-                            <h2 class="card-title h4">Post Title</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <!-- Blog post-->
-                    <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                        <div class="card-body">
-                            <div class="small text-muted">{{ posteo.fecha_publicacion }}</div>
-                            <h2 class="card-title h4">Post Title</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
-                        </div>
-                    </div>
-                    <!-- Blog post-->
-                    <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                        <div class="card-body">
-                            <div class="small text-muted">January 1, 2023</div>
-                            <h2 class="card-title h4">Post Title</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<style>
+    .image-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .image-container img {
+        max-width: 700px;
+        height: 300px;
+        object-fit: cover; /* Ajustar la imagen para que cubra el contenedor */
+    }
+</style>
 
 {% endblock contenido %}

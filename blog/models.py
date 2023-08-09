@@ -9,8 +9,12 @@ class Posteo (models.Model):
     bajada = models.CharField(max_length=140)
     creador = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posteo_creados', null=True)
     imagen = models.ImageField(upload_to='media')
-    texto = RichTextField(max_length=5000)
+    texto = RichTextField(config_name='default')
     fecha_publicacion=models.DateField(null=True)
 
     def __str__(self):
         return f"{self.titulo}, {self.creador}"
+    class Meta:
+        permissions = [
+            ("can_edit_all", "Can edit all content"),
+        ]

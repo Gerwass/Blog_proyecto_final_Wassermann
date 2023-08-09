@@ -7,6 +7,9 @@
 <form method="post">
  {% csrf_token %}
  {{ form.as_p }}
+ <a href="{% url 'agregar_avatar' %}">Cambiar Avatar</a><br>
  <input type="submit" value="Salvar"/>
+
 </form>
+
 {% endblock contenido %}

@@ -74,7 +74,7 @@ class MiPerfilUpdateView(LoginRequiredMixin, UpdateView):
 
 def agregar_avatar(request):
     if request.method == "POST":
-        formulario = AvatarFormulario(request.POST, request.FILES) # Aquí me llega toda la info del formulario html
+        formulario = AvatarFormulario(request.POST, request.FILES) 
 
         if formulario.is_valid():
             avatar = formulario.save()

@@ -19,7 +19,7 @@ class PosteoCreateView(LoginRequiredMixin,CreateView):
    fields = ('titulo', 'bajada', 'creador', 'imagen', 'texto','fecha_publicacion' )
    success_url = reverse_lazy('lista_posteos')
 
-class PosteoDetailView(LoginRequiredMixin,DetailView):
+class PosteoDetailView(DetailView):
    model = Posteo
    success_url = reverse_lazy('lista_posteos')
 

@@ -33,3 +33,19 @@ class PosteoDeleteView(LoginRequiredMixin,DeleteView):
    success_url = reverse_lazy('lista_posteos')
 
 
+def buscar_posteo(request):
+   if request.method == "POST":
+       data = request.POST
+       busqueda = data["busqueda"]
+       posteos = Posteo.objects.filter(titulo__contains=busqueda)
+       posteos = Posteo.objects.all().order_by('-fecha_publicacion')
+       contexto = {
+           "posteos": posteos,
+       }
+       http_response = render(
+           request=request,
+           template_name='inicio.html',
+           context=contexto,
+       )
+       return http_response
+   

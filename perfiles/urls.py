@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from perfiles.views import  (registro, login_view, CustomLogoutView,MiPerfilUpdateView,
-                             agregar_avatar,about)
+                             agregar_avatar, about , mensajes_privados)
 
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
     path('editar-mi-perfil/', MiPerfilUpdateView.as_view(), name="editar_perfil"),
     path('agregar-avatar/', agregar_avatar, name="agregar_avatar"),
     path("blog/",include("blog.urls")),
+    path('mensaje/<str:username>', mensajes_privados),
     path('about/', about, name='about'),
     
     ]

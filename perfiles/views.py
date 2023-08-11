@@ -4,7 +4,8 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView
-from django.views.generic import ListView, DetailView
+from perfiles.models import CanalMensaje, CanalUsuario, Canal
+from django.http import HttpResponse
 
 
 from perfiles.forms import UserRegisterForm, UserUpdateForm
@@ -100,3 +101,26 @@ def about(request):
     )
 
 
+
+
+def mensajes_privados(request, username, *args, **kwargs):
+
+    if not request.user.is_authenticated:
+        return HttpResponse("Prohibido")
+    
+    mi_username = request.user.username
+
+
+    canal, created = Canal.objects.obtener_o_crear_canal_ms(mi_username, username)
+    if created:
+        print("si, fue creadeo")
+    
+        
+    Usuarios_Canal=canal.canalusuario_set.all().values("usuario__username")
+    print(Usuarios_Canal)
+    mensaje_canal = canal.canalmensaje_set.all()
+    print(mensaje_canal.values("texto"))
+
+
+
+    return HttpResponse(f"Nuestro ID del Canal - {canal.id}")

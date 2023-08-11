@@ -4,6 +4,8 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView
+from django.views.generic import ListView, DetailView
+
 
 from perfiles.forms import UserRegisterForm, UserUpdateForm
 
@@ -96,3 +98,5 @@ def about(request):
         request=request,
         template_name="perfiles/about.html"
     )
+
+

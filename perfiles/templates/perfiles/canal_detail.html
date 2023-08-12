@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    <h3>Identificador del canal: {{object.id}}</h3>
+
+
+    <h1>Mensaje del canal</h1>
+
+    {% for mensaje in object.canalmensaje_set.all %}
+
+        {% if request.user == mensaje.usuario %}
+            <p>
+                <strong>
+                {{mensaje.texto| safe}}
+                </strong>
+            <span>
+            
+            Lo enviaste tu
+            </span>
+        </p>
+
+        {% else %}
+        <p>
+            <strong>
+                {{mensaje.texto| safe}}
+            </strong>
+            <span>
+            {{mensaje.usuario}}
+            </span>
+        </p>
+
+        {% endif%}
+
+    {% endfor %}
+
+    <h1>Usuarios del Canal</h1>
+    {% for usuarios in object.canalusuario_set.all %}
+    <p>
+        {{usuarios.usuario}}
+    </p>
+    {% endfor %}
+    <form action="{{ request.path }}" method="post" >
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <button type = "submit">
+        Enviar
+    </button>
+    </form>
+{% endblock %}

@@ -3,7 +3,8 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from perfiles.views import  (registro, login_view, CustomLogoutView,MiPerfilUpdateView,
-                             agregar_avatar, about , mensajes_privados,DetailsMs,CanalDetailView)
+                             agregar_avatar, about , mensajes_privados,DetailsMs,CanalDetailView,
+                             Inbox)
 
 
 
@@ -18,6 +19,9 @@ urlpatterns = [
     path('dm/<str:username>', mensajes_privados),
     path('ms/<str:username>', DetailsMs.as_view(),name = "detailms"),
     re_path(r'canal/(?P<pk>[\w-]+)', CanalDetailView.as_view()),
+    path('Inbox', Inbox.as_view(), name = "Inbox"),
+    
+
     path('about/', about, name='about'),
     
     ]

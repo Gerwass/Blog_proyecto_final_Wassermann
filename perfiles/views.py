@@ -10,6 +10,7 @@ from django.views.generic import DetailView
 from django.core.exceptions import PermissionDenied
 from .forms import FormMensaje
 from django.views.generic.edit import FormMixin
+from django.views.generic import View
 
 
 
@@ -106,6 +107,21 @@ def about(request):
     )
 
 
+class Inbox(View):
+    def get(self,request):
+        user_id = request.user.id
+        
+        inbox =Canal.objects.filter(canalusuario__usuario=user_id,canalmensaje__isnull=False).distinct()
+
+        context = {
+
+            "inbox" : inbox
+
+        }
+
+        return render(request, 'perfiles/inbox.html', context)
+
+
 
 class CanalFormMixin(FormMixin):
     form_class = FormMensaje
@@ -165,7 +181,7 @@ class CanalDetailView(LoginRequiredMixin,CanalFormMixin,DetailView):
     #    return qs
 
 
-class DetailsMs(LoginRequiredMixin,DetailView):
+class DetailsMs(LoginRequiredMixin,DetailView,CanalFormMixin):
 
     template_name = 'perfiles/canal_detail.html'
 

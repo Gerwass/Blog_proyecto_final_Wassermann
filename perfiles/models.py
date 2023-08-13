@@ -59,7 +59,7 @@ class CanalManager(models.Manager):
     def obtener_o_crear_canal_usuario_actual(self,user):
         qs = self.get_queryset().solo_uno().filtrar_por_username(user.username)
         if qs.exists():
-            return qs.order_by("tiempo").fisrt(), False
+            return qs.order_by("tiempo").first(), False
         canal_obj = Canal.objects.create()
         CanalUsuario.objects.create(usuario=user, canal=canal_obj)
         return canal_obj, True
@@ -93,7 +93,9 @@ class CanalManager(models.Manager):
         if usuario_a == None or usuario_b == None:
             return None , False
 
-        obj_canal = self.model().create()
+        obj_canal = Canal.objects.create_canal()
+
+        #obj_canal = self.model().create()
   
         canal_usuario_a = CanalUsuario(usuario = usuario_a,canal=obj_canal)
         canal_usuario_b = CanalUsuario(usuario = usuario_b,canal=obj_canal)

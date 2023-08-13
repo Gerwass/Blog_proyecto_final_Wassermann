@@ -124,7 +124,7 @@ class CanalFormMixin(FormMixin):
             mensaje = form.cleaned_data.get("mensaje")
             canal_obj = CanalMensaje.objects.create(canal = canal, usuario=usuario, texto = mensaje)
             
-            if request.is_ajax():
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return JsonResponse({
                     
                     'mensaje':canal_obj.texto,
@@ -134,7 +134,7 @@ class CanalFormMixin(FormMixin):
             
             return super().form_valid(form)
         else:
-            if request.is_ajax():
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return JsonResponse({"Error": form.errors}, status=400)
 
             return super().form_invalid(form)

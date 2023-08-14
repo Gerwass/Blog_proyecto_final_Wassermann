@@ -37,7 +37,7 @@
     {% for usuario in usuarios %}
         {% with inbox=usuario.canalusuario_set.first %}
             <a href="{% url 'detailms' usuario.username %}">
-                <p>{{ usuario.username }}</p>
+                <p>{{ usuario.username }} </p>
 
             </a>
         {% endwith %}

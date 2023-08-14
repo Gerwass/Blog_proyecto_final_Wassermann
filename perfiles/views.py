@@ -17,7 +17,7 @@ from django.views.generic import View
 from perfiles.forms import UserRegisterForm, UserUpdateForm
 
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 
 from perfiles.forms import UserRegisterForm,AvatarFormulario
@@ -269,3 +269,11 @@ def crear_canal(request):
     }
     return render(request, 'perfiles/inbox.html', context)
 
+def eliminar_usuario(request, username):
+    user = get_object_or_404(User, username=username)
+    
+    if request.method == 'POST':
+        user.delete()
+        return redirect('inicio')  # Cambia esto a la URL a la que quieres redirigir después de eliminar
+    
+    return render(request, 'perfiles/eliminar_usuario.html', {'user': user})

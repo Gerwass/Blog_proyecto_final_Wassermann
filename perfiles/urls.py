@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from perfiles.views import  (registro, login_view, CustomLogoutView,MiPerfilUpdateView,
                              agregar_avatar, about , mensajes_privados,DetailsMs,CanalDetailView,
-                             Inbox, CrearCanalView,crear_canal)
+                             Inbox,crear_canal,eliminar_usuario)
 
 
 
@@ -21,7 +21,7 @@ urlpatterns = [
     re_path(r'canal/(?P<pk>[\w-]+)', CanalDetailView.as_view(), name = "detalle"),
     path('inbox', Inbox.as_view(), name = "inbox"),
     path('crear_canal/',crear_canal, name='crear_canal'),
-
+    path('eliminar-perfil/<str:username>/', eliminar_usuario, name="eliminar_perfil"),
 
     path('about/', about, name='about'),
     

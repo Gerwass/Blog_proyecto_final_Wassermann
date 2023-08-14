@@ -9,6 +9,8 @@
  {{ form.as_p }}
  <a href="{% url 'agregar_avatar' %}">Cambiar Avatar</a><br>
  <input type="submit" value="Salvar"/>
+ <br>
+ <a href="{% url 'eliminar_perfil' object.username %}">Eliminar usuario<i class="bi bi-trash"></i></a>
 
 </form>
 

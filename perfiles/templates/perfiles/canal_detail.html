@@ -92,11 +92,15 @@
 
 </style>
 
-{% for usuario in object.canalmensaje_set.all %}
-    <h3>Identificador del canal: {{mensaje.canal.usuario}}</h3>
-
+{% for mensaje in object.canalmensaje_set.all %}
+    {% for user in mensaje.canal.usuarios.all %}
+        {% if user != request.user %}
+            <h1>Estas hablando con: {{ user.username }}</h1>
+        {% endif %}
+    {% endfor %}
 {% endfor %}
-    <h1>Mensaje del canal</h1>
+
+    <h4>Mensajes</h4>
     <div id = "contenedor_ms">
     {% for mensaje in object.canalmensaje_set.all %}
         <div class="div_ms {% if request.user == mensaje.usuario %} mis_mensajes

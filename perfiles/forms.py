@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from perfiles.models import Avatar
+from ckeditor.fields import RichTextField
 
 
 class UserRegisterForm(UserCreationForm):
@@ -28,3 +29,15 @@ class AvatarFormulario(forms.ModelForm):
    class Meta:
        model = Avatar
        fields = ['imagen']
+
+
+
+class FormMensaje(forms.Form):
+    mensaje =forms.CharField(widget=forms.Textarea(attrs = {
+
+        "class": "formularios_ms",
+        "placeholder": "Escribe tu mensaje"
+
+
+    }))
+

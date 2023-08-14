@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+
+
+
 {% block contenido %}
 <section>
  <div>
@@ -10,17 +13,18 @@
     <br>
    <table class="table">
      <tbody>
-       <tr>
+       <tr class="tabla-fila">
          <th>ID</th>
          <th>Titulo</th>
          <th>Creador</th>
          <td>Fecha publicacion</td>
          <td></td>
          <td></td>
+         <td></td>
        </tr>
        {% if object_list %}
           {% for posteo in object_list %}
-          <tr>
+          <tr class="tabla-fila">
             <td>{{ posteo.id }}</td>
             <td>{{ posteo.titulo }}</td>
             <td>{{ posteo.creador }}</td>
@@ -49,4 +53,11 @@
 
  </div>
 </section>
+
+
+<style>
+  .tabla-fila {
+   background-color: #fff; 
+    }
+</style>
 {% endblock contenido %}

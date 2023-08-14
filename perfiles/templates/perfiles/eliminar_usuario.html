@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<form method="post">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <p>Estás a punto de eliminar al usuario <b>{{ user.username }}</p>
+ <input type="submit" value="Eliminar" />
+</form>
+
+<br>
+<a href="{% url 'inicio' %}">Volver lista</a>
+
+{% endblock contenido %}

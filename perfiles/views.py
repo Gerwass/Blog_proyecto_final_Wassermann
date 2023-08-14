@@ -110,12 +110,13 @@ def about(request):
 class Inbox(View):
     def get(self,request):
         user_id = request.user.id
-        
+        usuarios = User.objects.exclude(id=request.user.id) 
         inbox =Canal.objects.filter(canalusuario__usuario=user_id,canalmensaje__isnull=False).distinct()
 
         context = {
 
-            "inbox" : inbox
+            "inbox" : inbox,
+            "usuarios": usuarios
 
         }
 
@@ -222,3 +223,49 @@ def mensajes_privados(request, username, *args, **kwargs):
 
 
     return HttpResponse(f"Nuestro ID del Canal - {canal.id}")
+
+
+
+
+class CrearCanalView(View):
+    def post(self, request):
+        usuario_destino = request.POST.get('usuario_destino')  # Obtén el nombre de usuario seleccionado
+
+        user = request.user  # Obtén el usuario actual
+
+        # Intenta obtener o crear el canal
+        canal_obj, creado = Canal.objects.obtener_o_crear_canal_ms(user.username, usuario_destino)
+
+        if creado:
+            # Redirigir al nuevo canal o donde desees
+            return redirect('detailms', canal_id=canal_obj.id)
+        else:
+            # El canal ya existe, muestra un mensaje o realiza alguna acción
+            return render(request, 'perfiles/inbox.html', {'mensaje': 'El canal ya existe'})
+        
+
+
+from django.shortcuts import render, redirect
+from .models import Canal, User  # Asegúrate de importar User si aún no lo has hecho
+
+def crear_canal(request):
+    if request.method == 'POST':
+        usuario_destino = request.POST.get('usuario_destino')
+        user = request.user
+
+        # Obtener o crear el canal con el usuario destino
+        canal_obj, creado = Canal.objects.obtener_o_crear_canal_ms(user.username, usuario_destino)
+
+        if creado:
+            # Redirigir al nuevo canal o donde desees
+            return redirect('detailms', canal_id=canal_obj.id)
+        
+    
+    # Obtener todos los usuarios existentes
+    usuarios = User.objects.all()
+
+    context = {
+        'usuarios': usuarios,
+    }
+    return render(request, 'perfiles/inbox.html', context)
+

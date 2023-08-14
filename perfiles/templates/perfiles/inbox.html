@@ -1,77 +1,69 @@
 {% extends 'base.html' %}
 
+<TITLE>
+{% block titulo%}
+    INBOX
+{% endblock titulo%}
+
+</TITLE>
 {% block contenido %}
 
-<h1>
-Bienvenido {{user}}.Inbox
+<!--
+<h2>Selecciona un usuario para chatear</h2>
+<form method="POST" action="{% url 'crear_canal' %}">
+    {% csrf_token %}
+    <label for="usuario_destino">Selecciona un usuario:</label>
+    <select name="usuario_destino">
+        {% for usuario in usuarios %}
+            <option value="{{ usuario.username }}">{{ usuario.username }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Crear chat</button>
+</form>
+-->
+
+
+<h1 style= "width: 70%; margin: 50px auto">
+{{user}} Inbox
 </h1>
 
-{% for inbox in inbox %}
-<div class ="div_inbox">
-
-    {% for ms in inbox.canalmensaje_set.all %}
-        {{ms.texto | safe}}
-    {%endfor%}
-
-    {% for second_user in inbox.canalusuario_set.all %}
 
 
-        {% if second_user.usuario == request.user %}
 
-        
-        {%else%}
-            <a href="{% url 'detailms' second_user.usuario.username %}" >
-                    <p>
 
-                        {{ second_user.usuario }}
 
-                    </p>
-                    <small>
 
-                        ({{inbox.canalmensaje_set.count}}) Mensajes
+<div class="div_inbox">
+    {% for usuario in usuarios %}
+        {% with inbox=usuario.canalusuario_set.first %}
+            <a href="{% url 'detailms' usuario.username %}">
+                <p>{{ usuario.username }}</p>
 
-                    </small>
             </a>
-
-        {% endif %}
-
-
-    
+        {% endwith %}
     {% endfor %}
-
-    {% if inbox.canalmensaje_set.count != 0 %}
-        <div class = "div_ms_inbox">
-
-            {% with ultimo_mensaje=inbox.canalmensaje_set.last %}
-
-            <p>
-                Mensaje: {{ultimo_mensaje.texto | safe}}
-            </p>
-
-            <p>
-               Usuario: {{ultimo_mensaje.usuario}}
-            </p>
-
-            {% endwith %}
-        </div>
-
-
-
-    {% else %}
-
-    <p>
-        No hay mensajes en nuestro inbox
-     </p>
-
-     {% endif %}
 </div>
 
 
 
-<h2>
 
-    Inbox Vacio
 
-</h2>
-{% endfor %}
+<style>
+
+
+    .div_inbox{
+
+        width: 90%;
+        margin: 10px auto;
+        background: #fff;
+        border-radius: 5px;
+        border: 3px solid #e6e6e6;
+        padding: 5px;
+
+    }
+
+
+
+</style>
+
 {% endblock %}

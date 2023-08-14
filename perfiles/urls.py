@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from perfiles.views import  (registro, login_view, CustomLogoutView,MiPerfilUpdateView,
                              agregar_avatar, about , mensajes_privados,DetailsMs,CanalDetailView,
-                             Inbox)
+                             Inbox, CrearCanalView,crear_canal)
 
 
 
@@ -16,11 +16,12 @@ urlpatterns = [
     path('editar-mi-perfil/', MiPerfilUpdateView.as_view(), name="editar_perfil"),
     path('agregar-avatar/', agregar_avatar, name="agregar_avatar"),
     path("blog/",include("blog.urls")),
-    path('dm/<str:username>', mensajes_privados),
+    path('dm/<str:username>', mensajes_privados, name = "mensajes_privados"),
     path('ms/<str:username>', DetailsMs.as_view(),name = "detailms"),
-    re_path(r'canal/(?P<pk>[\w-]+)', CanalDetailView.as_view()),
-    path('Inbox', Inbox.as_view(), name = "Inbox"),
-    
+    re_path(r'canal/(?P<pk>[\w-]+)', CanalDetailView.as_view(), name = "detalle"),
+    path('inbox', Inbox.as_view(), name = "inbox"),
+    path('crear_canal/',crear_canal, name='crear_canal'),
+
 
     path('about/', about, name='about'),
     

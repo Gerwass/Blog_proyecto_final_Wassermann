@@ -93,7 +93,7 @@ class CanalManager(models.Manager):
         if usuario_a == None or usuario_b == None:
             return None , False
 
-        obj_canal = Canal.objects.create_canal()
+        obj_canal = Canal.objects.create()
 
         #obj_canal = self.model().create()
   

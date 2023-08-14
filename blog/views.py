@@ -38,10 +38,18 @@ def buscar_posteo(request):
        data = request.POST
        busqueda = data["busqueda"]
        posteos = Posteo.objects.filter(titulo__contains=busqueda)
-       posteos = Posteo.objects.all().order_by('-fecha_publicacion')
-       contexto = {
+       
+       if busqueda == "":
+          posteos = Posteo.objects.all().order_by('-fecha_publicacion')
+          contexto = {
            "posteos": posteos,
-       }
+            }
+       
+       
+       else:
+         contexto = {
+            "posteos": posteos,
+         }
        http_response = render(
            request=request,
            template_name='inicio.html',

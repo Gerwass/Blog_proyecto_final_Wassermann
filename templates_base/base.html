@@ -16,10 +16,20 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-
+    
+        <style>
+            
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
+    
     </head>
 
-    <body>
+    <body style="background-color:#d0d9f4;">
        <!-- Navigation-->
        <nav class="navbar navbar-light bg-light static-top" display="inline">
         <div class="container">
@@ -28,7 +38,8 @@
             
             
             {% if user.is_authenticated %}
-            <a class="nav-link active" aria-current="page" href="{% url 'lista_posteos' %}">Lista de Publicaciones</a></li>
+            <a class="nav-link active" aria-current="page" href="{% url 'lista_posteos' %}">Lista de Publicaciones</a>
+            <a class="nav-link active" href="{% url 'inbox' %}" class="bi-twitter fs-3"><strong>Inbox</strong> <i class="bi-envelope"></i></a>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <div style="display: inline-flex;">
@@ -52,6 +63,7 @@
             <a class="btn btn-primary" href="{% url 'login' %}">Iniciar sesión</a>
             <a class="btn btn-success" href="{% url 'registro' %}">Crear nueva cuenta</a>
             {% endif %}
+        </nav>
         </div>
      
 

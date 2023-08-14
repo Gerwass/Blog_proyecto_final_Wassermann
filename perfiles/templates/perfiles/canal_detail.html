@@ -1,53 +1,124 @@
 {% extends 'base.html' %}
 
+
+
 {% block contenido %}
-    <h3>Identificador del canal: {{object.id}}</h3>
+
+<style>
 
 
+    #contenedor_ms{
+
+        width: 90%;
+        margin: 10px auto;
+        background: #fff;
+        border-radius: 5px;
+        border-bottom: 3px solid #e6e6e6;
+        padding: 5px;
+        overflow-y: auto
+        
+
+    }
+    .div_ms{
+
+        margin: 1.2rem auto;
+        width: 35%;
+        padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+        margin-bottom: 50px;
+        
+
+    }
+
+    .mis_mensajes{
+
+
+        margin-right: 5px;
+        background-color: rgb(29, 161, 242);
+        
+        
+
+    }
+
+    .tus_mensajes{
+
+
+        margin-left: 5px;
+        background-color: rgb(29, 242, 161);
+        
+
+    }
+
+
+    .div_form_ms{
+
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 50px;
+        margin-left: -3px;
+        border: 1px solid #e6e6e6
+    }
+
+    #id_mensaje{
+        display: block;
+        padding: 6px 12px;
+        margin-right: 1%;
+        margin-left: 1%;
+        width: 98%;
+        height: 50 px;
+        min-height: 50px;
+        max-height: 150px;
+        box-sizing: border-box;
+        font-size: 14px;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        
+
+    }
+
+    .btn_enviar{
+        background: #98ca3f;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius:5px;
+        border:none;
+        otuline:none;
+        border-bottom: 5px solid #6d932b;
+        width: 150px:
+        cursor: pointer;
+        display: block;
+        transition: 0.3;
+    }
+
+</style>
+
+{% for usuario in object.canalmensaje_set.all %}
+    <h3>Identificador del canal: {{mensaje.canal.usuario}}</h3>
+
+{% endfor %}
     <h1>Mensaje del canal</h1>
     <div id = "contenedor_ms">
     {% for mensaje in object.canalmensaje_set.all %}
-
-        {% if request.user == mensaje.usuario %}
-            <p>
-                <strong>
-                {{mensaje.texto| safe}}
-                </strong>
-            <span>
+        <div class="div_ms {% if request.user == mensaje.usuario %} mis_mensajes
+        {% else %} tus_mensajes {%endif %}">
+            <small>{{mensaje.usuario}}</small>
+            <p>{{mensaje.texto| safe}}</p>
+            <small>{{mensaje.tiempo}}</small>
+        </div>
             
-            Lo enviaste tu
-            </span>
-        </p>
-
-        {% else %}
-        <p>
-            <strong>
-                {{mensaje.texto| safe}}
-            </strong>
-            <span>
-            {{mensaje.usuario}}
-            </span>
-        </p>
-
-        {% endif%}
-
     {% endfor %}
-    </div>
-    <h1>Usuarios del Canal</h1>
-    {% for usuarios in object.canalusuario_set.all %}
-    <p>
-        {{usuarios.usuario}}
-    </p>
-    {% endfor %}
-    <form id="form_submit" action="{{ request.path }}" method="POST" >
-        {% csrf_token %}
-        
-        {{ form.as_p }}
-        <button type = "submit">
-            Enviar
-        </button>
-    </form>
     
+    </div>
+    <div class ="div_form_ms">
+        <form id="form_submit" action="{{ request.path }}" method="POST" >
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+            <button type = "submit" class ="btn_enviar">
+                Enviar
+            </button>
+    </form>
+    </div>
 
 
 
@@ -107,5 +178,7 @@
 
 
 </script>
+
+
 
 {% endblock %}

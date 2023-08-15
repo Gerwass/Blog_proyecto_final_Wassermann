@@ -25,5 +25,3 @@ python manage.py createsuperuser
 username:HomeroJSimpson
 contraseña:Mantenimiento2020!
 
-# Usuarios normales
-??
